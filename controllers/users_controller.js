@@ -22,6 +22,7 @@ module.exports.profile = function(req,res){
  // get the sign_up Data
 //this was not running due to mongoose version
 
+ /* 
  module.exports.create = function(req,res){
      if (req.body.password != req.body.confirm_password){
         return res.redirect('back');
@@ -40,7 +41,30 @@ module.exports.profile = function(req,res){
             return res.redirect('back');
         }
      })
- }
+ } */
+
+// CODE FOR NEWER MONGOOSE VERSION
+
+     module.exports.create = async function(req, res) {
+    try {
+        if (req.body.password !== req.body.confirm_password) {
+            return res.redirect('/users/sign-up');
+        }
+
+        const user = await User.findOne({ email: req.body.email });
+
+        if (!user) {
+            await User.create(req.body);
+            return res.redirect('/users/sign-in');
+        } else {
+            return res.redirect('/users/sign-u');
+        }
+
+    } catch (err) {
+        console.log('Error in user sign-up:', err);
+        return res.redirect('/users/sign-u');
+    }
+};
 
 // sign in and create the session foe user
 
