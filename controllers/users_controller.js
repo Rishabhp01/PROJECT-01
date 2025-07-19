@@ -20,6 +20,7 @@ module.exports.profile = function(req,res){
  }
 
  // get the sign_up Data
+//this was not running due to mongoose version
 
  module.exports.create = function(req,res){
      if (req.body.password != req.body.confirm_password){
