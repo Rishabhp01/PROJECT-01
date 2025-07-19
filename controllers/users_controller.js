@@ -57,12 +57,12 @@ module.exports.profile = function(req,res){
             await User.create(req.body);
             return res.redirect('/users/sign-in');
         } else {
-            return res.redirect('/users/sign-u');
+            return res.redirect('/users/sign-up');
         }
 
     } catch (err) {
         console.log('Error in user sign-up:', err);
-        return res.redirect('/users/sign-u');
+        return res.redirect('/users/sign-up');
     }
 };
 
